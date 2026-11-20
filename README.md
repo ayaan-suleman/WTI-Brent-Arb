@@ -13,6 +13,7 @@ Brent prices crude delivered into Europe; WTI prices crude at Cushing, Oklahoma.
 1. **Downloads** daily prices from free public sources:
    - Spot: Europe Brent FOB and WTI Cushing, from FRED (which republishes the US EIA series).
    - Futures: ICE Brent and NYMEX WTI front month, from Yahoo Finance.
+   - Additional: Onyx Flux data currently used for manual checks
 2. **Stores** every raw observation in a SQLite database (`data/prices.db`), one row per date and series, with no gaps filled in.
 3. **Aligns** the two legs of each pair and **drops any day where one leg did not actually print**.
 4. **Flags** days where the spread sits two or more standard deviations from its 60-day rolling mean.
@@ -69,10 +70,10 @@ All in `src/analyse.py`:
 - **Front-month futures roll.** The continuous Yahoo series switches contract each month, which can create a jump in the price that is not a market move. Brent and WTI also roll on different dates.
 - **Public spot series are not the trade benchmarks.** The EIA/FRED Brent spot series is not the same as the price-reporting-agency assessments that physical trades are priced against.
 - **The z-score is a simple measure.** It assumes the spread behaves roughly normally around its recent mean, which doesn't hold in a crisis.
-- **No freight yet.** A wide spread only matters if it beats the cost of shipping. Adding a freight estimate is the next step.
+- **No freight as of yet.** A wide spread only matters if it beats the cost of shipping. Adding a freight estimate is the next step.
 
 ## Next steps
 
 - Add a transatlantic freight estimate so the flag means "arbitrage likely open", not just "spread unusual".
 - Handle the futures roll properly.
-- Extend to refined products (e.g. gasoil, gasoline) across regions.
+- Extend to refined products (e.g. ULSD, Jet A-1, gasoil, gasoline) across regions.
