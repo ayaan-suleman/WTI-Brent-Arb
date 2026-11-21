@@ -74,6 +74,6 @@ All in `src/analyse.py`:
 
 ## Next steps
 
-- Add a transatlantic freight estimate so the flag means "arbitrage likely open", not just "spread unusual".
+- To add a transatlantic freight estimate so the flag means "arbitrage likely open", not just "spread unusual".
 - Handle the futures roll properly.
 - Extend to refined products (e.g. ULSD, Jet A-1, gasoil, gasoline) across regions.
